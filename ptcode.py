@@ -198,6 +198,11 @@ def main() -> None:
         pretty = ", ".join([f"{k}:{v}" for k, v in top])
         print(f"📊 Top opcodes: {pretty}")
 
+        # ✅ New: Print summary of contracts with dangerous opcodes
+    dangerous_contracts = sum(1 for r in results if sum(r["dangerous"].values()) > 0)
+    print(f"\n📈 Summary: {dangerous_contracts}/{len(results)} contract(s) contain dangerous opcodes.")
+
+
     if args.json:
         out = {
             "rpc": args.rpc,
